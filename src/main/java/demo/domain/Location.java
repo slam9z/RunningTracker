@@ -1,5 +1,9 @@
 package demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.Data;
+
 import javax.persistence.*;
 import javax.validation.OverridesAttribute;
 import java.util.Date;
@@ -7,8 +11,9 @@ import java.util.Date;
 /**
  * Created by vagrant on 4/4/17.
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
-@Table(name = "RUNNING_LOCATIONS")
+@Data
 public class Location {
     enum GpsStatus{
         EXCELLENT, OK, UNRELIABLE, BAD, NOFIX, UNKOWN;
@@ -53,6 +58,9 @@ public class Location {
     private RunnerMovementType runnerMovementType = RunnerMovementType.STOPPED;
     private String serviceType;
 
+    public Location(){
+        this.unitInfo = null;
+    }
     public Location(String runningId){
         unitInfo = new UnitInfo(runningId);
     }
