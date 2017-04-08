@@ -22,10 +22,8 @@ public class LocationServiceImpl implements LocationService{
         this.locationRepository = locationRespository;
     }
 
-
     @Override
     public List<Location> saveRunningLocations(List<Location> runningLocations) {
-
         return locationRepository.save(runningLocations);
     }
 
@@ -38,6 +36,5 @@ public class LocationServiceImpl implements LocationService{
     public Page<Location> findByRunnerMovementType(String movementType, Pageable pageable) {
         return locationRepository.findByRunnerMovementType(Location.RunnerMovementType.valueOf(movementType), pageable);
     }
-
 
 }

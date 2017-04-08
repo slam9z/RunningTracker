@@ -20,7 +20,6 @@ public class RunningBulkUploadController {
     private LocationService locationService;
 
     @RequestMapping(value = "/running", method = RequestMethod.POST)
-    @ResponseStatus(HttpStatus.CREATED)
     public void upload(@RequestBody List<Location> locations){
         locationService.saveRunningLocations(locations);
     }
@@ -32,8 +31,8 @@ public class RunningBulkUploadController {
 
     @RequestMapping(value = "/running/{movementType}", method = RequestMethod.GET)
     public Page<Location> findByMovementType(@PathVariable String movementType,
-                                             @RequestParam(name = "page") int page,
-                                             @RequestParam(name = "size") int size){
+                                             @RequestParam(name = "page", required = false) Integer page,
+                                             @RequestParam(name = "size", required = false) Integer size){
         return this.locationService.findByRunnerMovementType(movementType, new PageRequest(page, size));
 
     }
