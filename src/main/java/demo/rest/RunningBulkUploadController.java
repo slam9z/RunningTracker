@@ -1,6 +1,7 @@
 package demo.rest;
 
 import demo.domain.Location;
+import demo.domain.LocationRepository;
 import demo.service.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,8 +17,12 @@ import java.util.List;
 @RestController
 public class RunningBulkUploadController {
 
-    @Autowired
     private LocationService locationService;
+
+    @Autowired
+    public RunningBulkUploadController(LocationService locationService){
+        this.locationService = locationService;
+    }
 
     @RequestMapping(value = "/running", method = RequestMethod.POST)
     public void upload(@RequestBody List<Location> locations){
